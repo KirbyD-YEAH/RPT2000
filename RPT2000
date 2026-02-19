@@ -19,6 +19,7 @@
            LABEL RECORDS ARE OMITTED
            RECORD CONTAINS 130 CHARACTERS
            BLOCK CONTAINS 130 CHARACTERS.
+
        01  CUSTOMER-MASTER-RECORD.
            05  CM-BRANCH-NUMBER        PIC 9(2).
            05  CM-SALESREP-NUMBER      PIC 9(2).
@@ -78,16 +79,19 @@
            05  FILLER          PIC X(1)    VALUE ":".
            05  HL2-MINUTES     PIC 9(2).
            05  FILLER          PIC X(58)   VALUE SPACE.
-           05  FILLER          PIC X(10)   VALUE "RPT1000".
+           05  FILLER          PIC X(10)   VALUE "RPT2000".
            05  FILLER          PIC X(49)   VALUE SPACE.
 
        01  HEADING-LINE-3.
+           05  FILLER      PIC X(130)  VALUE SPACE.
+
+       01  HEADING-LINE-4.
            05  FILLER      PIC X(20)   VALUE "CUST                ".
            05  FILLER      PIC X(20)   VALUE "            SALES   ".
            05  FILLER      PIC X(20)   VALUE "      SALES         ".
            05  FILLER      PIC X(69)   VALUE SPACE.
 
-       01  HEADING-LINE-4.
+       01  HEADING-LINE-5.
            05  FILLER      PIC X(20)   VALUE "NUM    CUSTOMER NAME".
            05  FILLER      PIC X(20)   VALUE "           THIS YTD ".
            05  FILLER      PIC X(20)   VALUE "     LAST YTD       ".
@@ -171,6 +175,7 @@
            MOVE HEADING-LINE-3 TO PRINT-AREA.
            WRITE PRINT-AREA.
            MOVE HEADING-LINE-4 TO PRINT-AREA.
+           MOVE HEADING-LINE-5 TO PRINT-AREA.
            WRITE PRINT-AREA.
            MOVE ZERO TO LINE-COUNT.
            MOVE 2 TO SPACE-CONTROL.
