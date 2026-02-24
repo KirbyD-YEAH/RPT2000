@@ -19,7 +19,6 @@
            LABEL RECORDS ARE OMITTED
            RECORD CONTAINS 130 CHARACTERS
            BLOCK CONTAINS 130 CHARACTERS.
-
        01  CUSTOMER-MASTER-RECORD.
            05  CM-BRANCH-NUMBER        PIC 9(2).
            05  CM-SALESREP-NUMBER      PIC 9(2).
@@ -59,6 +58,9 @@
            05  CD-MINUTES      PIC 99.
            05  FILLER          PIC X(9).
 
+       01  CALCULATED-FIELDS.
+           05  CHANGE-AMOUNT   PIC S9(5)V99.
+
        01  HEADING-LINE-1.
            05  FILLER          PIC X(7)    VALUE "DATE:  ".
            05  HL1-MONTH       PIC 9(2).
@@ -79,25 +81,25 @@
            05  FILLER          PIC X(1)    VALUE ":".
            05  HL2-MINUTES     PIC 9(2).
            05  FILLER          PIC X(58)   VALUE SPACE.
-           05  FILLER          PIC X(10)   VALUE "RPT2000".
+           05  FILLER          PIC X(10)   VALUE "RPT1000".
            05  FILLER          PIC X(49)   VALUE SPACE.
 
        01  HEADING-LINE-3.
-           05  FILLER      PIC X(130)  VALUE SPACE.
+           05  FILLER      PIC X(20)   VALUE "CUST                ".
+           05  FILLER      PIC X(20)   VALUE "            SALES   ".
+           05  FILLER      PIC X(20)   VALUE "      SALES         ".
+           05  FILLER      PIC X(20)   VALUE "CHANGE      CHANGE  ".
+           05  FILLER      PIC X(69)   VALUE SPACE.
 
        01  HEADING-LINE-4.
-           05  FILLER      PIC X(20)   VALUE "BRANCH SALES CUST   ".
-           05  FILLER      PIC X(20)   VALUE SPACE.
-           05  FILLER      PIC X(20)   VALUE "     SALES       SAL".
-           05  FILLER      PIC X(20)   VALUE "ES        CHANGE    ".
-           05  FILLER      PIC X(20)   VALUE "   CHANGE           ".
-           05  FILLER      PIC X(29)   VALUE SPACE.
-
-       01  HEADING-LINE-5.
            05  FILLER      PIC X(20)   VALUE "NUM    CUSTOMER NAME".
            05  FILLER      PIC X(20)   VALUE "           THIS YTD ".
            05  FILLER      PIC X(20)   VALUE "     LAST YTD       ".
+           05  FILLER      PIC X(20)   VALUE "AMOUNT      PERCENT ".
            05  FILLER      PIC X(69)   VALUE SPACE.
+
+       01  HEADING-LINE-5.
+           05  FILLER      PIC X(130)  VALUE '-'.
 
        01  CUSTOMER-LINE.
            05  CL-CUSTOMER-NUMBER  PIC 9(5).
@@ -107,14 +109,22 @@
            05  CL-SALES-THIS-YTD   PIC ZZ,ZZ9.99-.
            05  FILLER              PIC X(4)     VALUE SPACE.
            05  CL-SALES-LAST-YTD   PIC ZZ,ZZ9.99-.
-           05  FILLER              PIC X(69)    VALUE SPACE.
+           05  FILLER              PIC X(4)     VALUE SPACE.
+           05  CL-CHANGE-AMOUNT    PIC ZZ,ZZ9.99-.
+           05  FILLER              PIC X(3)     VALUE SPACE.
+           05  CL-CHANGE-PERCENT   PIC ZZ9.9-.
+           05  FILLER              PIC X(55)    VALUE SPACE.
 
        01  GRAND-TOTAL-LINE.
            05  FILLER              PIC X(27)    VALUE SPACE.
            05  GTL-SALES-THIS-YTD  PIC Z,ZZZ,ZZ9.99-.
            05  FILLER              PIC X(1)     VALUE SPACE.
            05  GTL-SALES-LAST-YTD  PIC Z,ZZZ,ZZ9.99-.
-           05  FILLER              PIC X(69)    VALUE SPACE.
+           05  FILLER              PIC X(1)     VALUE SPACE.
+           05  GTL-CHANGE-AMOUNT   PIC Z,ZZZ,ZZ9.99-.
+           05  FILLER              PIC X(3)     VALUE SPACE.
+           05  GTL-CHANGE-PERCENT  PIC ZZ9.9-.
+           05  FILLER              PIC X(55)    VALUE SPACE.
 
        PROCEDURE DIVISION.
 
@@ -177,7 +187,6 @@
            MOVE HEADING-LINE-3 TO PRINT-AREA.
            WRITE PRINT-AREA.
            MOVE HEADING-LINE-4 TO PRINT-AREA.
-           MOVE HEADING-LINE-5 TO PRINT-AREA.
            WRITE PRINT-AREA.
            MOVE ZERO TO LINE-COUNT.
            MOVE 2 TO SPACE-CONTROL.
