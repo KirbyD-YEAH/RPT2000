@@ -86,10 +86,12 @@
            05  FILLER      PIC X(130)  VALUE SPACE.
 
        01  HEADING-LINE-4.
-           05  FILLER      PIC X(20)   VALUE "CUST                ".
-           05  FILLER      PIC X(20)   VALUE "            SALES   ".
-           05  FILLER      PIC X(20)   VALUE "      SALES         ".
-           05  FILLER      PIC X(69)   VALUE SPACE.
+           05  FILLER      PIC X(20)   VALUE "BRANCH SALES CUST   ".
+           05  FILLER      PIC X(20)   VALUE SPACE.
+           05  FILLER      PIC X(20)   VALUE "     SALES       SAL".
+           05  FILLER      PIC X(20)   VALUE "ES        CHANGE    ".
+           05  FILLER      PIC X(20)   VALUE "   CHANGE           ".
+           05  FILLER      PIC X(29)   VALUE SPACE.
 
        01  HEADING-LINE-5.
            05  FILLER      PIC X(20)   VALUE "NUM    CUSTOMER NAME".
