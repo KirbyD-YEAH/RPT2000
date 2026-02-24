@@ -99,7 +99,20 @@
            05  FILLER      PIC X(69)   VALUE SPACE.
 
        01  HEADING-LINE-5.
-           05  FILLER      PIC X(130)  VALUE '-'.
+           05  FILLER      PIC X(6)  VALUE ALL '-'.
+           05  FILLER      PIC X(1)  VALUE SPACE.
+           05  FILLER      PIC X(5)  VALUE ALL '-'.
+           05  FILLER      PIC X(2)  VALUE SPACE.
+           05  FILLER      PIC X(20) VALUE ALL '-'.
+           05  FILLER      PIC X(3)  VALUE SPACE.
+           05  FILLER      PIC X(10) VALUE ALL '-'.
+           05  FILLER      PIC X(4)  VALUE SPACE.
+           05  FILLER      PIC X(10) VALUE ALL '-'.
+           05  FILLER      PIC X(4)  VALUE SPACE.
+           05  FILLER      PIC X(10) VALUE ALL '-'.
+           05  FILLER      PIC X(3)  VALUE SPACE.
+           05  FILLER      PIC X(6)  VALUE ALL '-'.
+           05  FILLER      PIC X(45) VALUE SPACE.
 
        01  CUSTOMER-LINE.
            05  CL-CUSTOMER-NUMBER  PIC 9(5).
@@ -187,6 +200,8 @@
            MOVE HEADING-LINE-3 TO PRINT-AREA.
            WRITE PRINT-AREA.
            MOVE HEADING-LINE-4 TO PRINT-AREA.
+           WRITE PRINT-AREA.
+           MOVE HEADING-LINE-5 TO PRINT-AREA.
            WRITE PRINT-AREA.
            MOVE ZERO TO LINE-COUNT.
            MOVE 2 TO SPACE-CONTROL.
