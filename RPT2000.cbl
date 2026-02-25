@@ -1,11 +1,11 @@
       ******************************************************************
-      * Title..........: CALC2000 - Future Value Calculator             
-      * Programmer.....: Ben Stearns and Kirby Dunker                                   
-      * Date...........: 2-24-26                                        
-      * GitHub URL.....: hhttps://github.com/KirbyD-YEAH/RPT2000.git         
+      * Title..........: CALC2000 - Future Value Calculator
+      * Programmer.....: Ben Stearns and Kirby Dunker
+      * Date...........: 2-24-26
+      * GitHub URL.....: hhttps://github.com/KirbyD-YEAH/RPT2000.git
       * Program Desc...: Generates a sales report for customers based on
-      *                  YTD and percent change from last year    
-      * File Desc......: Define the sole source code for application            
+      *                  YTD and percent change from last year
+      * File Desc......: Define the sole source code for application
       ******************************************************************     
        IDENTIFICATION DIVISION.
 
