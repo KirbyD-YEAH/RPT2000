@@ -34,7 +34,8 @@ For every run, the program will:
   4. Generate header, customer line, and final total information
   5. Write all the information to the print area for viewing
 
-For full program details, see ![Program Requirements)(#assets/Assignment_Instructions.pdf)
+For full program details, please see [Program Requirements](./assets/Assignment_Instructions.pdf)
+
 ## Screenshots
 
 ### Output
