@@ -110,9 +110,9 @@
            05  FILLER              PIC X(3)     VALUE SPACE.
            05  FILLER              PIC X(10)    VALUE " THIS YD ".
            05  FILLER              PIC X(4)     VALUE SPACE.
-           05  FILLER              PIC X(12)    VALUE" LAST YTD   ".
+           05  FILLER              PIC X(12)    VALUE " LAST YTD   ".
            05  FILLER              PIC X(4)     VALUE SPACE.
-           05  FILLER              PIC X(10)    VALUE"  AMOUNT  ".
+           05  FILLER              PIC X(10)    VALUE "  AMOUNT  ".
            05  FILLER              PIC X(3)     VALUE SPACE.
            05  FILLER              PIC X(7)     VALUE "PERCENT".
            05  FILLER              PIC X(37)    VALUE SPACE.
@@ -148,15 +148,15 @@
            05  FILLER              PIC X(55)    VALUE SPACE.
 
        01 HEADING-LINE-7.
-           05  FILLER      PIC X(38)            VALUE SPACE.
+           05  FILLER      PIC X(40)            VALUE SPACE.
            05  FILLER      PIC X(13)            VALUE ALL "=".
            05  FILLER      PIC X(1)             VALUE SPACE.
            05  FILLER      PIC X(13)            VALUE ALL "=".
            05  FILLER      PIC X(1)             VALUE SPACE.
            05  FILLER      PIC X(13)            VALUE ALL "=".
-           05  FILLER      PIC X(2)             VALUE SPACE.
+           05  FILLER      PIC X(3)             VALUE SPACE.
            05  FILLER      PIC X(6)             VALUE ALL "=".
-           05  FILLER      PIC X(42)            VALUE SPACE.
+           05  FILLER      PIC X(39)            VALUE SPACE.
 
        01  GRAND-TOTAL-LINE.
            05  FILLER              PIC X(40)    VALUE SPACE.
@@ -263,6 +263,7 @@
                         CHANGE-AMOUNT * 100 / GRAND-TOTAL-LAST-YTD
                         ON SIZE ERROR
                             MOVE 999.9 TO GTL-CHANGE-PERCENT.
-           
+           MOVE HEADING-LINE-7 TO PRINT-AREA.
+           WRITE PRINT-AREA.
            MOVE GRAND-TOTAL-LINE     TO PRINT-AREA.
            WRITE PRINT-AREA.
