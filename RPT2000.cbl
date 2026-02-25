@@ -1,5 +1,5 @@
       ******************************************************************
-      * Title..........: CALC2000 - Future Value Calculator
+      * Title..........: RPT2000 - Future Value Calculator
       * Programmer.....: Ben Stearns and Kirby Dunker
       * Date...........: 2-24-26
       * GitHub URL.....: hhttps://github.com/KirbyD-YEAH/RPT2000.git
@@ -316,3 +316,4 @@
            WRITE PRINT-AREA.
            MOVE GRAND-TOTAL-LINE     TO PRINT-AREA.
            WRITE PRINT-AREA.
+
