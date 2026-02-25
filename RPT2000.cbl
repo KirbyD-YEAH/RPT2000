@@ -22,13 +22,16 @@
        DATA DIVISION.
 
        FILE SECTION.
-
+      
        FD  CUSTMAST
            RECORDING MODE IS F
            LABEL RECORDS ARE OMITTED
            RECORD CONTAINS 130 CHARACTERS
            BLOCK CONTAINS 130 CHARACTERS.
 
+      *****************************************************************
+      * The customer master record contains the following fields
+      *****************************************************************
        01  CUSTOMER-MASTER-RECORD.
            05  CM-BRANCH-NUMBER        PIC 9(2).
            05  CM-SALESREP-NUMBER      PIC 9(2).
@@ -43,24 +46,33 @@
            LABEL RECORDS ARE OMITTED
            RECORD CONTAINS 130 CHARACTERS
            BLOCK CONTAINS 130 CHARACTERS.
+
+      *****************************************************************
+      * Define the print area for the report as a fixed 130 char length
+      *****************************************************************     
        01  PRINT-AREA      PIC X(130).
 
        WORKING-STORAGE SECTION.
+      
+      *****************************************************************
+      * Variable and field definitions for the report
+      *****************************************************************
 
+      * Determines when the end of the customer master file is reached
        01  SWITCHES.
            05  CUSTMAST-EOF-SWITCH     PIC X    VALUE "N".
-
+      * Controls spacing on the report and when to print heading lines
        01  PRINT-FIELDS.
            05  PAGE-COUNT      PIC S9(3)   VALUE ZERO.
            05  LINES-ON-PAGE   PIC S9(3)   VALUE +55.
            05  LINE-COUNT      PIC S9(3)   VALUE +99.
            05  SPACE-CONTROL   PIC S9.
-
+      * Totals for the report
        01  TOTAL-FIELDS.
            05  GRAND-TOTAL-THIS-YTD   PIC S9(7)V99   VALUE ZERO.
            05  GRAND-TOTAL-LAST-YTD   PIC S9(7)V99   VALUE ZERO.
            05  GRAND-TOTAL-CHANGE     PIC S9(7)V99   VALUE ZERO.
-
+      * Current date and time fields
        01  CURRENT-DATE-AND-TIME.
            05  CD-YEAR         PIC 9999.
            05  CD-MONTH        PIC 99.
@@ -68,11 +80,14 @@
            05  CD-HOURS        PIC 99.
            05  CD-MINUTES      PIC 99.
            05  FILLER          PIC X(9).
-
+      * Calculated fields for YTD change amount and percent change
        01  CALCULATED-FIELDS.
            05  CHANGE-AMOUNT   PIC S9(5)V99         VALUE ZERO.
            05  CHANGE-PERCENT  PIC S9(3)V9          VALUE ZERO.
-
+      
+      *****************************************************************
+      * Define all lines printed on the report
+      *****************************************************************
        01  HEADING-LINE-1.
            05  FILLER          PIC X(7)    VALUE "DATE:  ".
            05  HL1-MONTH       PIC 9(2).
@@ -179,9 +194,13 @@
            05  FILLER              PIC X(42)    VALUE SPACE.
 
        PROCEDURE DIVISION.
-
+      
+      *****************************************************************
+      * Main processing logic for app
+      *****************************************************************
        000-PREPARE-SALES-REPORT.
-
+      * Open the customer master file and the report output file
+      * Loop through the customer master file until the end is reached    
            OPEN INPUT  CUSTMAST
                 OUTPUT SRPT2000.
            PERFORM 100-FORMAT-REPORT-HEADING.
@@ -192,6 +211,9 @@
                  SRPT2000.
            STOP RUN.
 
+      *****************************************************************
+      * Get current data and time for heading
+      *****************************************************************
        100-FORMAT-REPORT-HEADING.
 
            MOVE FUNCTION CURRENT-DATE TO CURRENT-DATE-AND-TIME.
@@ -200,7 +222,10 @@
            MOVE CD-YEAR    TO HL1-YEAR.
            MOVE CD-HOURS   TO HL2-HOURS.
            MOVE CD-MINUTES TO HL2-MINUTES.
-
+      
+      *****************************************************************
+      * Prepares each customer line until the end of CUSTMAST reachec
+      *****************************************************************
        200-PREPARE-SALES-LINES.
 
            PERFORM 210-READ-CUSTOMER-RECORD.
@@ -212,7 +237,12 @@
            READ CUSTMAST
                AT END
                    MOVE "Y" TO CUSTMAST-EOF-SWITCH.
-
+      
+      *****************************************************************
+      * Gets the data for each customer line, calculates change amount
+      * and percent change, and prints the line. Also controls when to
+      * print the heading lines based on the number of lines printed on
+      *****************************************************************
        220-PRINT-CUSTOMER-LINE.
 
            IF LINE-COUNT >= LINES-ON-PAGE
@@ -226,6 +256,7 @@
            COMPUTE CHANGE-AMOUNT =
                 CM-SALES-THIS-YTD - CM-SALES-LAST-YTD.
            MOVE CHANGE-AMOUNT TO CL-CHANGE-AMOUNT.
+           *> default for % change is 999.9 if last YTD is 0
            IF CM-SALES-LAST-YTD = ZERO
                 MOVE 999.99 TO CL-CHANGE-PERCENT
            ELSE
@@ -239,7 +270,12 @@
            ADD CM-SALES-THIS-YTD TO GRAND-TOTAL-THIS-YTD.
            ADD CM-SALES-LAST-YTD TO GRAND-TOTAL-LAST-YTD.
            MOVE 1 TO SPACE-CONTROL.
-
+      
+      *****************************************************************
+      * Prints the heading lines at the top of the report and when the
+      * number of lines printed on the page reaches the limit. Also
+      * resets the line count and controls spacing on the report
+      *****************************************************************
        230-PRINT-HEADING-LINES.
 
            ADD 1 TO PAGE-COUNT.
@@ -258,7 +294,11 @@
            WRITE PRINT-AREA.
            MOVE ZERO TO LINE-COUNT.
            MOVE 2 TO SPACE-CONTROL.
-
+      
+      *****************************************************************
+      * Get grand totals, compute change amount and % change
+      * and print the grand total line at the end of the report
+      *****************************************************************
        300-PRINT-GRAND-TOTALS.
            MOVE GRAND-TOTAL-THIS-YTD TO GTL-SALES-THIS-YTD.
            MOVE GRAND-TOTAL-LAST-YTD TO GTL-SALES-LAST-YTD.
