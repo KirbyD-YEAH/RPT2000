@@ -3,7 +3,7 @@
 ![Output](assets/output.png)
 
 ## Authors
-[@bstearns07](https://github.com/bstearns07) Ben Stearns
+[@bstearns07](https://github.com/bstearns07) Ben Stearns<br>
 [@KirbyD-YEAH](https://github.com/KirbyD-YEAH) Kirby Dunker
 
 ## Table of Contents
