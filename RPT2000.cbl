@@ -95,7 +95,7 @@
            05  HL1-DAY         PIC 9(2).
            05  FILLER          PIC X(1)    VALUE "/".
            05  HL1-YEAR        PIC 9(4).
-           05  FILLER          PIC X(11)   VALUE SPACE.
+           05  FILLER          PIC X(23)   VALUE SPACE.
            05  FILLER          PIC X(20)   VALUE "YEAR-TO-DATE SALES R".
            05  FILLER          PIC X(20)   VALUE "EPORT               ".
            05  FILLER          PIC X(8)    VALUE "  PAGE: ".
@@ -107,7 +107,7 @@
            05  HL2-HOURS       PIC 9(2).
            05  FILLER          PIC X(1)    VALUE ":".
            05  HL2-MINUTES     PIC 9(2).
-           05  FILLER          PIC X(58)   VALUE SPACE.
+           05  FILLER          PIC X(70)   VALUE SPACE.
            05  FILLER          PIC X(10)   VALUE "RPT2000".
            05  FILLER          PIC X(49)   VALUE SPACE.
 
@@ -117,8 +117,8 @@
        01  HEADING-LINE-4.
            05  FILLER      PIC X(20)   VALUE "BRANCH SALES CUST   ".
            05  FILLER      PIC X(20)   VALUE SPACE.
-           05  FILLER      PIC X(20)   VALUE "     SALES         S".
-           05  FILLER      PIC X(20)   VALUE "ALES          CHANGE".
+           05  FILLER      PIC X(20)   VALUE "    SALES         SA".
+           05  FILLER      PIC X(20)   VALUE "LES          CHANGE ".
            05  FILLER      PIC X(20)   VALUE "     CHANGE         ".
            05  FILLER      PIC X(29)   VALUE SPACE.
 
@@ -128,7 +128,7 @@
            05  FILLER              PIC X(4)     VALUE SPACE.
            05  FILLER              PIC X(3)     VALUE "REP".
            05  FILLER              PIC X(1)     VALUE SPACE.
-           05  FILLER              PIC X(5)     VALUE "NUM  ".
+           05  FILLER              PIC X(5)     VALUE " NUM ".
            05  FILLER              PIC X(2)     VALUE SPACE.
            05  FILLER            PIC X(20) VALUE "CUSTOMER NAME       ".
            05  FILLER              PIC X(3)     VALUE SPACE.
@@ -136,7 +136,7 @@
            05  FILLER              PIC X(4)     VALUE SPACE.
            05  FILLER              PIC X(12)    VALUE " LAST YTD   ".
            05  FILLER              PIC X(4)     VALUE SPACE.
-           05  FILLER              PIC X(10)    VALUE "  AMOUNT  ".
+           05  FILLER              PIC X(10)    VALUE " AMOUNT   ".
            05  FILLER              PIC X(3)     VALUE SPACE.
            05  FILLER              PIC X(7)     VALUE "PERCENT".
            05  FILLER              PIC X(37)    VALUE SPACE.
